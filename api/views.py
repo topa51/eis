@@ -1,17 +1,71 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import Ship
-from api.serializers import ShipSerializer
-# from django.http import Http404
+from api.models import Ship, Invite
+from api.serializers import ShipSerializer, InviteSerializer
+from django.http import Http404
 from rest_framework import generics
 # from pprint import pprint
 # import django_filters
 # import json
-# from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 # from django.utils.datastructures import MultiValueDictKeyError
 # from datetime import datetime
 
 class ShipList(generics.ListCreateAPIView):
 	queryset = Ship.objects.all()
 	serializer_class = ShipSerializer
+
+class ShipDetail(APIView):
+	def get_object(self, pk):
+		try:
+			return Ship.objects.get(pk=pk)
+		except Ship.DoesNotExist:
+			raise Http404
+
+	def get(self, request, pk, format=None):
+		ship = self.get_object(pk)
+		serializer = ShipSerializer(ship)
+		return Response(serializer.data)
+
+	def put(self, request, pk, format=None):
+		ship = self.get_object(pk)
+		serializer = ShipSerializer(ship, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def delete(self, request, pk, format=None):
+		ship = self.get_object(pk)
+		ship.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)   
+
+class InviteList(generics.ListCreateAPIView):
+	queryset = Invite.objects.all()
+	serializer_class = InviteSerializer
+
+class InviteDetail(APIView):
+	def get_object(self, pk):
+		try:
+			return Invite.objects.get(pk=pk)
+		except Invite.DoesNotExist:
+			raise Http404
+
+	def get(self, request, pk, format=None):
+		invite = self.get_object(pk)
+		serializer = InviteSerializer(invite)
+		return Response(serializer.data)
+
+	def put(self, request, pk, format=None):
+		invite = self.get_object(pk)
+		serializer = InviteSerializer(invite, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def delete(self, request, pk, format=None):
+		invite = self.get_object(pk)
+		invite.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)   		 	

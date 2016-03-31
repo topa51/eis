@@ -17,3 +17,17 @@ class Ship(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Invite(models.Model):
+	key = models.CharField(max_length=255)
+	deeplink = models.CharField(max_length=255)
+	
+	timestamp = models.DateTimeField(
+			default=timezone.now)
+
+	def publish(self):
+		self.timestamp = timezone.now()
+		self.save()
+
+	def __str__(self):
+		return self.key		
