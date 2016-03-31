@@ -14,6 +14,33 @@ from rest_framework import filters
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 # from django.utils.datastructures import MultiValueDictKeyError
 # from datetime import datetime
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+import urllib
+import requests, re
+import time
+
+def post_list(request):
+	url = 'http://checkip.dyndns.org'
+	r = requests.get('http://checkip.dyndns.org')
+	ip = re.search(r'\d+\.\d+\.\d+\.\d+', r.text).group()
+
+	key = "key.ip:%s" % ip[0]
+	deeplink = request.GET.get('deeplink', '')
+	
+	invite = Invite.objects.filter(key=key)
+	if not invite.exists():
+		invite = Invite()
+	else :
+		invite = invite[:1].get()
+	invite.key = key
+	invite.deeplink = deeplink
+
+	invite.publish()
+
+	# html = "<html><body><pre>key: %s, deeplink: %s</pre></body></html>" % (key, deeplink)
+	return HttpResponseRedirect("https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8")
 
 class ShipList(generics.ListCreateAPIView):
 	queryset = Ship.objects.all()
