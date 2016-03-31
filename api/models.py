@@ -26,7 +26,7 @@ class Ship(models.Model):
 class Invite(models.Model):
 	key = models.CharField(max_length=255)
 	deeplink = models.CharField(max_length=255)
-	ip = models.CharField(max_length=255);
+	ip = models.CharField(max_length=255)
 	timestamp = models.DateTimeField(
 			default=timezone.now)
 	unixTimestamp = models.IntegerField(default=int(time.mktime(timezone.now().timetuple())))
