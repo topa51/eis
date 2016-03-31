@@ -44,7 +44,7 @@ class Janusz(models.Model):
 	januszType = models.IntegerField()
 	lat = models.DecimalField(max_digits=65, decimal_places=2)
 	lng = models.DecimalField(max_digits=65, decimal_places=2)
-	count = models.IntegerField()
+	count = models.IntegerField(default=0)
 	
 	timestamp = models.DateTimeField(
 			default=timezone.now)
@@ -54,6 +54,3 @@ class Janusz(models.Model):
 		self.timestamp = timezone.now()
 		self.unixTimestamp = int(time.mktime(timezone.now().timetuple()))
 		self.save()
-
-	def __str__(self):
-		return self.januszType		
