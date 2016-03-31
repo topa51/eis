@@ -3,25 +3,33 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.utils.timezone
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name='Invite',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('title', models.CharField(max_length=200)),
-                ('text', models.TextField()),
-                ('created_date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('published_date', models.DateTimeField(blank=True, null=True)),
-                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('key', models.CharField(max_length=255)),
+                ('deeplink', models.CharField(max_length=255)),
+                ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Ship',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('speed', models.DecimalField(decimal_places=2, max_digits=65)),
+                ('courseAngle', models.DecimalField(decimal_places=2, max_digits=65)),
+                ('lat', models.DecimalField(decimal_places=2, max_digits=65)),
+                ('lng', models.DecimalField(decimal_places=2, max_digits=65)),
+                ('name', models.CharField(max_length=200)),
+                ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
     ]
