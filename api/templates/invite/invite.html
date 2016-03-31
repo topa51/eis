@@ -27,7 +27,7 @@ var userOSver; // this is a string, use Number(userOSver) to convert
   }
 })();
 
-alert('user os '+userOS);
+
 if (userOS !== 'unknown') {
   var width = window.screen.width;
   var height = window.screen.height;
@@ -36,6 +36,8 @@ if (userOS !== 'unknown') {
 
   var url = "/echo/json/"; // tutaj endpoint co zapisze do bazy
   var params = "key=key.size:" + height + "x" + width + ".os:" + userOS + userOSver;
+
+  alert('user os '+userOS + params);
 
   var http = new XMLHttpRequest();
   http.open("POST", url, true);
