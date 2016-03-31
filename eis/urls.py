@@ -4,7 +4,8 @@ from django.contrib import admin
 from api.views import ShipList, ShipDetail
 from api.views import InviteList, InviteDetail
 from api.views import JanuszList, JanuszDetail
-from api.views import post_list
+from api.views import post_list, post_invite
+
 urlpatterns = [
     
     url(r'^admin/', include(admin.site.urls)),
@@ -16,5 +17,6 @@ urlpatterns = [
     url(r'^v1/janusz/$', JanuszList.as_view()),
     url(r'^v1/janusz/(?P<pk>[0-9]+)/$', JanuszDetail.as_view()),
     url(r'^$', post_list, name='post_list'),
+    url(r'^v1/post_invite/$', post_invite, name='post_invite'),
 
 ]
