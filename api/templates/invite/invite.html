@@ -26,32 +26,34 @@ var userOSver; // this is a string, use Number(userOSver) to convert
     userOSver = 'unknown';
   }
 })();
+	// 
+	
 
-
-if (userOS !== 'unknown') {
+// if (userOS !== 'unknown') {
   var width = window.screen.width;
   var height = window.screen.height;
 
-  
-
-  var url = "/echo/json/"; // tutaj endpoint co zapisze do bazy
+  var url = "http://tobiaszparys.pythonanywhere.com/v1/save/invite/"; // tutaj endpoint co zapisze do bazy
   var timestamp = Date.now() / 1000;
 
-  var params = "key=key.size:" + height + "x" + width + ".os:" + userOS + userOSver + ".timestamp:" + timestamp;
-
-  alert('params ', params);
-
+  var key = "key.size:" + height + "x" + width + ".os:" + userOS + userOSver;
+  var deeplink = '{{ deeplink }}';
+	
+  var params = "key="+key+"&deeplink="+deeplink+"&timestamp="+timestamp;
+  // alert(params);
   var http = new XMLHttpRequest();
   http.open("POST", url, true);
   http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
   http.onreadystatechange = function() {
     if (http.readyState == 4) {
       console.log("status: " + http.status);
       console.log("response: " + http.responseText);
+      // alert('http.status '+http.status + "response text" + http.responseText);
     }
     // tutaj można zrobić przekierowanie
-    //window.location = "www.google.com";
+    window.location = "https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8";
   };
   http.send(params);
-}
+// }
 </script>
