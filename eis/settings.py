@@ -83,7 +83,11 @@ DATABASES = {
 	}
 }
 
-REST_SESSION_LOGIN = False
+MIDDLEWARE_CLASSES = (
+
+    'api.disable.DisableCSRF', 
+
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
