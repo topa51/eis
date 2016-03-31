@@ -38,3 +38,22 @@ class Invite(models.Model):
 
 	def __str__(self):
 		return self.key		
+
+class Janusz(models.Model):
+	
+	januszType = models.IntegerField()
+	lat = models.DecimalField(max_digits=65, decimal_places=2)
+	lng = models.DecimalField(max_digits=65, decimal_places=2)
+	count = models.IntegerField()
+	
+	timestamp = models.DateTimeField(
+			default=timezone.now)
+	unixTimestamp = models.IntegerField(default=int(time.mktime(timezone.now().timetuple())))
+
+	def publish(self):
+		self.timestamp = timezone.now()
+		self.unixTimestamp = int(time.mktime(timezone.now().timetuple()))
+		self.save()
+
+	def __str__(self):
+		return self.januszType		

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Ship, Invite
+from .models import Ship, Invite, Janusz
 
 class ShipSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -11,3 +11,8 @@ class InviteSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Invite;
 		fields = ('id', 'key', 'deeplink')
+
+class JanuszSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Janusz;
+		fields = ('id', 'januszType', 'lat', 'lng', 'count')		
