@@ -26,20 +26,20 @@ def post_list(request):
 	r = requests.get('http://checkip.dyndns.org')
 	ip = re.search(r'\d+\.\d+\.\d+\.\d+', r.text).group()
 
-	key = "key.ip:%s" % ip[0]
-	deeplink = request.GET.get('deeplink', '')
+	# key = "key.ip:%s" % ip[0]
+	# deeplink = request.GET.get('deeplink', '')
 	
-	invite = Invite.objects.filter(key=key)
-	if not invite.exists():
-		invite = Invite()
-	else :
-		invite = invite[:1].get()
-	invite.key = key
-	invite.deeplink = deeplink
+	# invite = Invite.objects.filter(key=key)
+	# if not invite.exists():
+	# 	invite = Invite()
+	# else :
+	# 	invite = invite[:1].get()
+	# invite.key = key
+	# invite.deeplink = deeplink
 
-	invite.publish()
+	# invite.publish()
 
-	# html = "<html><body><pre>key: %s, deeplink: %s</pre></body></html>" % (key, deeplink)
+	html = "<html><body><pre>key: %s, deeplink: %s</pre></body></html>" % (key, ip)
 	return HttpResponseRedirect("https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8")
 
 class ShipList(generics.ListCreateAPIView):
