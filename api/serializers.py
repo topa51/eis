@@ -4,4 +4,4 @@ from .models import Ship
 class ShipSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ship
-        fields = ('speed', 'courseAngle', 'lat', 'lng', 'name', 'timestamp')
+        fields = ('id','speed', 'courseAngle', 'lat', 'lng', 'name', 'timestamp')
