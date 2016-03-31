@@ -50,6 +50,8 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
+	'api.disable.DisableCSRF'
+
 )
 
 ROOT_URLCONF = 'eis.urls'
@@ -83,11 +85,6 @@ DATABASES = {
 	}
 }
 
-MIDDLEWARE_CLASSES = (
-
-    'api.disable.DisableCSRF', 
-
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
