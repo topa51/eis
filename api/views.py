@@ -28,21 +28,23 @@ def post_list(request):
 		ip = x_forwarded_for.split(',')[0]
 	else:
 		ip = request.META.get('REMOTE_ADDR')
-   
-	key = "key.ip:%s" % ip[0]
-	deeplink = request.GET.get('deeplink', '')
-	
-	invite = Invite.objects.filter(key=key)
-	if not invite.exists():
-		invite = Invite()
-	else :
-		invite = invite[:1].get()
-	invite.key = key
-	invite.deeplink = deeplink
 
-	invite.publish()
+	key = "asd"
+	# key = "key.ip:%s" % ip[0]
+	# deeplink = request.GET.get('deeplink', '')
+	
+	# invite = Invite.objects.filter(key=key)
+	# if not invite.exists():
+	# 	invite = Invite()
+	# else :
+	# 	invite = invite[:1].get()
+	# invite.key = key
+	# invite.deeplink = deeplink
+
+	# invite.publish()
 
 	html = "<html><body><pre>key: %s, deeplink: %s</pre></body></html>" % (key, ip)
+	return HttpResponse(html)
 	# return HttpResponseRedirect("https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8")
 
 class ShipList(generics.ListCreateAPIView):
