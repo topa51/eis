@@ -2,7 +2,7 @@
 var userOS; // will either be iOS, Android or unknown
 var userOSver; // this is a string, use Number(userOSver) to convert
 
-function getOS() {
+(function getOS() {
   var ua = navigator.userAgent;
   var uaindex;
 
@@ -25,9 +25,7 @@ function getOS() {
   } else {
     userOSver = 'unknown';
   }
-};
-
-userOS = getOS()
+})();
 
 alert('asd'.userOS);
 if (userOS !== 'unknown') {
