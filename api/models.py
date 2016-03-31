@@ -7,8 +7,8 @@ from datetime import datetime
 class Ship(models.Model):
 	speed = models.DecimalField(max_digits=65, decimal_places=2)
 	courseAngle = models.DecimalField(max_digits=65, decimal_places=2)
-	lat = models.DecimalField(max_digits=65, decimal_places=2)
-	lng = models.DecimalField(max_digits=65, decimal_places=2)
+	lat = models.DecimalField(max_digits=65, decimal_places=10)
+	lng = models.DecimalField(max_digits=65, decimal_places=10)
 	name = models.CharField(max_length=200)
 	
 	timestamp = models.DateTimeField(
@@ -42,8 +42,8 @@ class Invite(models.Model):
 class Janusz(models.Model):
 	
 	januszType = models.IntegerField()
-	lat = models.DecimalField(max_digits=65, decimal_places=2)
-	lng = models.DecimalField(max_digits=65, decimal_places=2)
+	lat = models.DecimalField(max_digits=65, decimal_places=10)
+	lng = models.DecimalField(max_digits=65, decimal_places=10)
 	count = models.IntegerField(default=0)
 	
 	timestamp = models.DateTimeField(

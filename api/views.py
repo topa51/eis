@@ -3,8 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Ship, Invite, Janusz
 from api.serializers import ShipSerializer, InviteSerializer, JanuszSerializer
+from api.filters import InviteFilter
 from django.http import Http404
 from rest_framework import generics
+from rest_framework import filters
+
 # from pprint import pprint
 # import django_filters
 # import json
@@ -44,6 +47,8 @@ class ShipDetail(APIView):
 class InviteList(generics.ListCreateAPIView):
 	queryset = Invite.objects.all()
 	serializer_class = InviteSerializer
+	filter_backends = (filters.DjangoFilterBackend,)
+	filter_class = InviteFilter
 
 class InviteDetail(APIView):
 	def get_object(self, pk):

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'api',
 	'rest_framework',
+	'django_filters'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,6 +86,9 @@ DATABASES = {
 	}
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
