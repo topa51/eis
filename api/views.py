@@ -59,9 +59,9 @@ def get_invite_by_key(request):
 		ip = x_forwarded_for.split(',')[0]
 	else:
 		ip = request.META.get('REMOTE_ADDR')
-	# ip='127.0.0.10'
+	
 	key = request.GET.get('key', '')
-	deeplink = request.GET.get('deeplink', '')
+	
 	queryset = Invite.objects.filter(key=key)
 
 	if not queryset.exists():
@@ -69,7 +69,6 @@ def get_invite_by_key(request):
 	else:
 		invite = queryset[:1].get()
 		if invite.ip == ip:
-			invite.deeplink = deeplink;
 			serializer = InviteSerializer(invite)
 			return Response(serializer.data)
 		else :
