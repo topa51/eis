@@ -71,7 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'eis.wsgi.application'
-https://github.com/topa51/eis.git
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
