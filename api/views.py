@@ -24,10 +24,10 @@ import time
 def post_list(request):
 	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 	ip = "some ip"
-   	if x_forwarded_for:
-   		ip = x_forwarded_for.split(',')[0]
-   	else:
-   		ip = request.META.get('REMOTE_ADDR')
+	if x_forwarded_for:
+		ip = x_forwarded_for.split(',')[0]
+	else:
+		ip = request.META.get('REMOTE_ADDR')
    
 	key = "key.ip:%s" % ip[0]
 	deeplink = request.GET.get('deeplink', '')
