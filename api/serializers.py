@@ -10,4 +10,4 @@ class ShipSerializer(serializers.HyperlinkedModelSerializer):
 class InviteSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Invite;
-		fields = ('id', 'key', 'deeplink', 'unixTimestamp')
+		fields = ('id', 'key', 'deeplink')
