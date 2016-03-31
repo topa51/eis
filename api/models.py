@@ -29,11 +29,11 @@ class Invite(models.Model):
 	
 	timestamp = models.DateTimeField(
 			default=timezone.now)
-	unixTimestamp = models.IntegerField(default=int(time.mktime(timezone.now().timetuple())))
-	
+
+
 	def publish(self):
 		self.timestamp = timezone.now()
-		self.unixTimestamp = int(time.mktime(timezone.now().timetuple()))
+		
 		self.save()
 
 	def __str__(self):
