@@ -29,7 +29,7 @@ def post_list(request):
 	else:
 		ip = request.META.get('REMOTE_ADDR')
 
-	key = "key.ip:%s" % ip[0]
+	key = "key.ip:%s" % ip
 	deeplink = request.GET.get('deeplink', '')
 	
 	invite = Invite.objects.filter(key=key)
