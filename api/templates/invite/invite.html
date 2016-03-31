@@ -35,9 +35,11 @@ if (userOS !== 'unknown') {
   
 
   var url = "/echo/json/"; // tutaj endpoint co zapisze do bazy
-  var params = "key=key.size:" + height + "x" + width + ".os:" + userOS + userOSver;
+  var timestamp = Date.now() / 1000;
 
-  alert('user os '+userOS + params);
+  var params = "key=key.size:" + height + "x" + width + ".os:" + userOS + userOSver + ".timestamp:" + timestamp;
+
+  alert('params ', params);
 
   var http = new XMLHttpRequest();
   http.open("POST", url, true);
