@@ -21,6 +21,7 @@ from django.http import HttpResponseRedirect
 import urllib
 import requests, re
 import time
+import json
 
 def render_invite(request):
 	deeplink = request.GET.get('deeplink', '')
@@ -59,8 +60,10 @@ def get_wiki(request):
 	req = urllib.request.Request('https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord=59.330141%7C18.072134&format=json')
 	response = urllib.request.urlopen(req)
 
+	with open('query') as response:    
+    	data = json.load(response)
 
-	return Response(response, status=status.HTTP_200_OK)
+	return Response(data, status=status.HTTP_200_OK)
 
 	
 
