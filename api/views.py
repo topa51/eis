@@ -57,7 +57,7 @@ def get_wiki(request):
 	lon = request.GET.get('lon', '')
 
 	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord=59.330141%7C18.072134&format=json'
-	req = urllib.request.Request('locu_url')
+	req = urllib.request.Request(locu_url)
 	response = urllib.request.urlopen(req)
 	the_page = response.read()
 
