@@ -21,6 +21,7 @@ from django.http import HttpResponseRedirect
 import urllib
 import requests, re
 import time
+import json
 
 def render_invite(request):
 	deeplink = request.GET.get('deeplink', '')
