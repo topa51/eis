@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from api.models import Ship, Invite, Janusz
-from api.serializers import ShipSerializer, InviteSerializer, JanuszSerializer
+from api.models import Ship, Invite, Janusz, GeoSearch, Image
+from api.serializers import ShipSerializer, InviteSerializer, JanuszSerializer, GeoSearchSerializer
 from api.filters import InviteFilter
 from django.http import Http404
 from rest_framework import generics
@@ -22,6 +22,7 @@ import urllib
 import requests, re
 import time
 import json
+import pprint
 
 def render_invite(request):
 	deeplink = request.GET.get('deeplink', '')
@@ -52,23 +53,75 @@ def save_invite(request):
 
 	return HttpResponseRedirect("https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8")
 
+def default(o):
+    return o._asdict()
+
 @api_view(['GET'])
 def get_wiki(request):
 	lat = request.GET.get('lat', '')
 	lon = request.GET.get('lon', '')
 
-	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord=59.330141%7C18.072134&format=json'
-	req = urllib.request.Request(locu_url)
-	response = urllib.request.urlopen(req)
-	the_page = response.read()
+	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord='+lat+'%7C'+lon+'&format=json'
+	print(locu_url)
+	
+	resp = requests.get(locu_url)
+	x = resp.json()
+	geosearch = x["query"]["geosearch"]
 
-	json_obj = urllib.request.urlopen(locu_url)
+	newgeosearch = []
+	for geo in geosearch:
+		newGeo = GeoSearch()
+		newGeo.pageId = geo["pageid"]
+		newGeo.lat = geo["lat"]
+		newGeo.lon = geo["lon"]
+
+		imageUrl = 'https://sv.wikipedia.org/w/api.php?action=query&prop=extracts|images&exintro=&explaintext=&format=json&pageids='+str(geo["pageid"])
+		respImage = requests.get(imageUrl)
+		respoImageJson = respImage.json()
+		newGeo.desc = respoImageJson["query"]["pages"][str(newGeo.pageId)]["extract"]
+
+		images = respoImageJson["query"]["pages"][str(newGeo.pageId)]["images"]
+		
+		if len(images) > 0:
+			newImage = Image()
+			newImage.title = images[0]["title"]
+			
+			words = newImage.title.split(":")
+			if len(words):
+				filename = words[1]
+				fileUrl = "https://en.wikipedia.org/w/api.php?action=query&titles=File:"+filename+"&prop=imageinfo&iiprop=url&format=json"
+				fileResp = requests.get(fileUrl)
+				fileJson = fileResp.json()
+				# print(fileUrl)
+				try:
+					imageInfo = fileJson["query"]["pages"]["33285577"]["imageinfo"][0]["url"]
+					# imageInfo = fileJson["query"]["pages"]["-1"]["imageinfo"]["url"]
+					print("###################")
+					print(fileJson)
+					print("*******************")
+					print(imageInfo)
+					print("###################")
+					print("\n")
+				except:
+					try:
+						imageInfo = fileJson["query"]["pages"]["-1"]["imageinfo"][0]["url"]
+					except:
+						imageInfo = ""
+					
+					# print(fileUrl)
+					# print(fileJson)
+					# fileJson["query"]["pages"]["-1"]["imageinfo"]["url"]
+				
+				newGeo.imageurl = imageInfo
+
+			
 
 
-	json_data = json.load(json_obj)
+		
 
+		newgeosearch.append(json.JSONDecoder().decode(json.dumps(newGeo, default=default)))
 
-	return Response(json_data, status=status.HTTP_200_OK)
+	return Response(newgeosearch, status=status.HTTP_200_OK)
 
 	
 

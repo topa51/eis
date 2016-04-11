@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Ship, Invite, Janusz
+from .models import Ship, Invite, Janusz, GeoSearch
 
 class ShipSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,3 +16,9 @@ class JanuszSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Janusz;
 		fields = ('id', 'januszType', 'lat', 'lng', 'count')		
+
+class GeoSearchSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = GeoSearch;
+		fields = ('pageId')		
+						

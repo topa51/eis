@@ -3,6 +3,7 @@ from django.utils import timezone
 from django_unixdatetimefield import UnixDateTimeField
 import time
 from datetime import datetime
+import json
 
 class Ship(models.Model):
 	speed = models.DecimalField(max_digits=65, decimal_places=2)
@@ -54,3 +55,29 @@ class Janusz(models.Model):
 		self.timestamp = timezone.now()
 		self.unixTimestamp = int(time.mktime(timezone.now().timetuple()))
 		self.save()
+
+class GeoSearch(models.Model):
+	
+	pageId = models.IntegerField();
+	lat = models.DecimalField(max_digits=65, decimal_places=10)
+	lng = models.DecimalField(max_digits=65, decimal_places=10)
+	desc = models.TextField()
+	imageurl = models.CharField(max_length=255)
+
+	def __init__(self, pageId='', desc=''):
+		self.pageId = pageId
+		self.desc = desc
+
+	def _asdict(self):
+		return self.__dict__
+
+	def to_JSON(self):
+		return json.dumps(self, default=lambda o: o.__dict__, 
+			sort_keys=True, indent=4)
+
+class Image(models.Model):
+	title = models.CharField(max_length=255)
+						
+	
+	
+		
