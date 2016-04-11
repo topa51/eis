@@ -61,7 +61,7 @@ def get_wiki(request):
 	response = urllib.request.urlopen(req)
 
 	with open('query') as response:    
-    	data = json.load(response)
+		data = json.load(response)
 
 	return Response(data, status=status.HTTP_200_OK)
 
@@ -182,4 +182,4 @@ class JanuszDetail(APIView):
 
 
 		
-                  
+				  
