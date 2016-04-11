@@ -52,6 +52,15 @@ def save_invite(request):
 	return HttpResponseRedirect("https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8")
 
 @api_view(['GET'])
+def get_wiki(request):
+	lat = request.GET.get('lat', '')
+	lon = request.GET.get('lon', '')
+
+	return Response(status=status.HTTP_200_OK)
+
+	
+
+@api_view(['GET'])
 def get_invite_by_key(request):
 	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
 	ip = ""
@@ -162,4 +171,8 @@ class JanuszDetail(APIView):
 	def delete(self, request, pk, format=None):
 		janusz = self.get_object(pk)
 		janusz.delete()
-		return Response(status=status.HTTP_204_NO_CONTENT)                      
+		return Response(status=status.HTTP_204_NO_CONTENT)    
+
+
+		
+                  

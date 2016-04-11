@@ -4,7 +4,7 @@ from django.contrib import admin
 from api.views import ShipList, ShipDetail
 # from api.views import InviteList, InviteDetail
 from api.views import JanuszList, JanuszDetail
-from api.views import render_invite, save_invite, get_invite_by_key
+from api.views import render_invite, save_invite, get_invite_by_key, get_wiki
 
 urlpatterns = [
     
@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^v1/send/invite/$', render_invite, name='render_invite'),
     url(r'^v1/save/invite/$', save_invite, name='save_invite'),
     url(r'^v1/invite/$', get_invite_by_key, name='get_invite_by_key'),
+
+    url(r'^v1/wiki/$', get_wiki, name='get_wiki'),
     
 ]

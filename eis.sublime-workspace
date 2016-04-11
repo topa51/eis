@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"time",
+				"timestamp"
+			],
+			[
+				"user",
+				"userOS"
+			],
+			[
+				"sc",
+				"script"
+			],
+			[
+				"In",
+				"Invite"
+			],
+			[
 				"sour",
 				"sourceName"
 			],
@@ -71,6 +87,65 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "eis/urls.py",
+			"settings":
+			{
+				"buffer_size": 1018,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/views.py",
+			"settings":
+			{
+				"buffer_size": 4898,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<script>\nvar userOS; // will either be iOS, Android or unknown\nvar userOSver; // this is a string, use Number(userOSver) to convert\n\n(function getOS() {\n  var ua = navigator.userAgent;\n  var uaindex;\n\n  // determine OS\n  if (ua.match(/iPad/i) || ua.match(/iPhone/i)) {\n    userOS = 'iOS';\n    uaindex = ua.indexOf('OS ');\n  } else if (ua.match(/Android/i)) {\n    userOS = 'Android';\n    uaindex = ua.indexOf('Android ');\n  } else {\n    userOS = 'unknown';\n  }\n\n  // determine version\n  if (userOS === 'iOS' && uaindex > -1) {\n    userOSver = ua.substr(uaindex + 3, 3).replace('_', '.');\n  } else if (userOS === 'Android' && uaindex > -1) {\n    userOSver = ua.substr(uaindex + 8, 3);\n  } else {\n    userOSver = 'unknown';\n  }\n})();\n	// \n	\n\n// if (userOS !== 'unknown') {\n  var width = window.screen.width;\n  var height = window.screen.height;\n\n  var url = \"http://tobiaszparys.pythonanywhere.com/v1/save/invite/\"; // tutaj endpoint co zapisze do bazy\n  var timestamp = Date.now() / 1000;\n\n  var key = \"key.size:\" + height + \"x\" + width + \".os:\" + userOS + userOSver;\n  var deeplink = '{{ deeplink }}';\n	\n  var params = \"key=\"+key+\"&deeplink=\"+deeplink+\"&timestamp=\"+timestamp;\n  // alert(params);\n  var http = new XMLHttpRequest();\n  http.open(\"POST\", url, true);\n  http.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\n  \n  http.onreadystatechange = function() {\n    if (http.readyState == 4) {\n      console.log(\"status: \" + http.status);\n      console.log(\"response: \" + http.responseText);\n      // alert('http.status '+http.status + \"response text\" + http.responseText);\n    }\n    // tutaj można zrobić przekierowanie\n    window.location = \"https://itunes.apple.com/pl/app/eniro-pa-sjon-free-nautical/id444222894?mt=8\";\n  };\n  http.send(params);\n// }\n</script>",
+			"file": "api/templates/invite/invite.html",
+			"file_size": 1788,
+			"file_write_time": 131039198730000000,
+			"settings":
+			{
+				"buffer_size": 1786,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/filters.py",
+			"settings":
+			{
+				"buffer_size": 282,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/serializers.py",
+			"settings":
+			{
+				"buffer_size": 596,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/models.py",
+			"settings":
+			{
+				"buffer_size": 1744,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/admin.py",
+			"settings":
+			{
+				"buffer_size": 158,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -105,10 +180,21 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis"
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/templates",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/templates/invite",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/eis"
 	],
 	"file_history":
 	[
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/templates/invite/post_list.html",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/eis/settings.py",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/disable.py",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/views/ships.py",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/models.py",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/serializers.py",
+		"/Users/TobiaszParys/Documents/ENIRO/hackaton/2016/Eis/api/views.py",
 		"/Users/TobiaszParys/Documents/TSAP/PYTHON/Kids2/api/views/comments.py",
 		"/Users/TobiaszParys/Documents/TSAP/PYTHON/Kids2/notification/fields.py",
 		"/Users/TobiaszParys/Documents/TSAP/PYTHON/Kids2/api/admin.py",
@@ -168,7 +254,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -182,6 +268,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"REST_SESSION_LOGIN",
+			"patterns",
 			"count",
 			"unicode",
 			"upload_to_unique",
@@ -229,8 +317,207 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "eis/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1018,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								961,
+								951
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "api/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4898,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4880,
+								4880
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1546.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "api/templates/invite/invite.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1786,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1131,
+								1139
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "api/filters.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 282,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								181
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "api/serializers.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 596,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "api/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1744,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1121,
+								1128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "api/admin.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 158,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								155,
+								155
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
