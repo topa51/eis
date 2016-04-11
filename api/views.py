@@ -58,11 +58,18 @@ def get_wiki(request):
 	lat = request.GET.get('lat', '')
 	lon = request.GET.get('lon', '')
 
-	response = urllib2.urlopen("https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord=59.330141%7C18.072134&format=json")
-	data = simplejson.load(response)
-	# print data["content"]
+	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord=59.330141%7C18.072134&format=json'
+	req = urllib.request.Request('locu_url')
+	response = urllib.request.urlopen(req)
+	the_page = response.read()
 
-	return Response(data, status=status.HTTP_200_OK)
+	json_obj = urllib.request.urlopen(locu_url)
+
+
+	json_data = json.load(json_obj)
+
+
+	return Response(json_data, status=status.HTTP_200_OK)
 
 	
 
