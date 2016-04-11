@@ -61,7 +61,7 @@ def get_wiki(request):
 	lat = request.GET.get('lat', '')
 	lon = request.GET.get('lon', '')
 
-	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=100&gscoord='+lat+'%7C'+lon+'&format=json'
+	locu_url = 'https://sv.wikipedia.org/w/api.php?action=query&prop=images&list=geosearch&gsradius=1000&gscoord='+lat+'%7C'+lon+'&format=json'
 	print(locu_url)
 	
 	resp = requests.get(locu_url)

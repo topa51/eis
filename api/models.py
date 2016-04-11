@@ -59,10 +59,11 @@ class Janusz(models.Model):
 class GeoSearch(models.Model):
 	
 	pageId = models.IntegerField();
-	lat = models.DecimalField(max_digits=65, decimal_places=10)
-	lng = models.DecimalField(max_digits=65, decimal_places=10)
+	lat = models.DecimalField(max_digits=65, decimal_places=20)
+	lng = models.DecimalField(max_digits=65, decimal_places=20)
 	desc = models.TextField()
 	imageurl = models.CharField(max_length=255)
+	title = models.CharField(max_length=255)
 
 	def __init__(self, pageId='', desc=''):
 		self.pageId = pageId
