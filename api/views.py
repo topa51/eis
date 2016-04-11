@@ -74,6 +74,7 @@ def get_wiki(request):
 		newGeo.pageId = geo["pageid"]
 		newGeo.lat = geo["lat"]
 		newGeo.lon = geo["lon"]
+		newGeo.title = geo["title"]
 
 		imageUrl = 'https://sv.wikipedia.org/w/api.php?action=query&prop=extracts|images&exintro=&explaintext=&format=json&pageids='+str(geo["pageid"])
 		respImage = requests.get(imageUrl)
